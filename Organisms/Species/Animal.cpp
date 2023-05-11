@@ -17,3 +17,7 @@ Organism* Animal::consequence(Organism* org1, Organism* org2) {
     }
 }
 
+bool Animal::isToxic() {
+    return false;
+}
+

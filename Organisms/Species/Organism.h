@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <array>
 #include "Utils/Position.h"
 
 using namespace std;
@@ -12,9 +13,15 @@ private:
     string species;
     int powerToReproduce;
     int lifeTime;
+    int born = 0;
+    array<array<int, 2>, 1000> ancestors;
 
 public:
     Organism(Position position);
+
+    int getBorn();
+    void setBorn(int born);
+
 
     string getSpecies();
     void setSpecies(string spec);
@@ -36,4 +43,12 @@ public:
     virtual void move(int dx, int dy) = 0;
     virtual Organism* clone(Position position) = 0;
     virtual Organism* consequence(Organism* org1, Organism* org2) = 0;
+    virtual bool isToxic() = 0;
+
+
+    string printAncestors();
+    void addAncestors(int born, int died);
+
+    array<array<int, 2>, 1000> cloneAncestors();
+    void setAncestors(array<array<int, 2>, 1000>);
 };

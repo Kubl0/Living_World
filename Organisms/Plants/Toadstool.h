@@ -6,5 +6,7 @@ public:
     Toadstool(Position position);
 
     Toadstool* clone(Position position);
+
+    bool isToxic();
 };
 

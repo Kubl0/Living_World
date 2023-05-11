@@ -12,3 +12,7 @@ void Plant::move(int dx, int dy) {
 Organism* Plant::consequence(Organism* org1, Organism* org2) {
     return nullptr;
 }
+
+bool Plant::isToxic() {
+    return false;
+}

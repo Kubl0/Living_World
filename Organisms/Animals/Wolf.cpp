@@ -10,5 +10,7 @@ Wolf::Wolf(Position position) : Animal(position)
 
 Wolf* Wolf::clone(Position position)
 {
-    return new Wolf(position);
+    Wolf* wolf = new Wolf(position);
+    wolf->setAncestors(cloneAncestors());
+    return wolf;
 }

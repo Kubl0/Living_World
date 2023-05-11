@@ -59,3 +59,43 @@ void Organism::move(int dx, int dy) {
     this->position.setX(this->position.getX() + dx);
     this->position.setY(this->position.getY() + dy);
 }
+
+int Organism::getBorn() {
+    return born;
+}
+
+void Organism::setBorn(int born) {
+    this->born = born;
+}
+
+
+string Organism::printAncestors() {
+    string result = "";
+    for (auto & ancestor : ancestors) {
+        if (ancestor[1] == 0) {
+            break;
+        }
+        result += "Born: " + to_string(ancestor[0]) + " Died: " + to_string(ancestor[1]) + "\n";
+    }
+    return result;
+}
+
+void Organism::addAncestors(int born, int died) {
+    for (auto & ancestor : ancestors) {
+        if (ancestor[0] == 0) {
+            ancestor[0] = born;
+            ancestor[1] = died;
+            break;
+        }
+    }
+}
+
+array<array<int, 2>, 1000> Organism::cloneAncestors() {
+    return ancestors;
+}
+
+void Organism::setAncestors(array<array<int, 2>, 1000> ancestors) {
+    this->ancestors = ancestors;
+}
+
+

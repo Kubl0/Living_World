@@ -10,5 +10,7 @@ public:
 
     Organism* consequence(Organism* org1, Organism* org2);
 
+    bool isToxic();
+
     virtual Plant* clone(Position position) = 0;
 };

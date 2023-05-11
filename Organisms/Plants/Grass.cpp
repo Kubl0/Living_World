@@ -10,5 +10,7 @@ Grass::Grass(Position position) : Plant(position)
 
 Grass* Grass::clone(Position position)
 {
-    return new Grass(position);
+    Grass* grass = new Grass(position);
+    grass->setAncestors(cloneAncestors());
+    return grass;
 }

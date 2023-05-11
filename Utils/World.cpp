@@ -8,7 +8,8 @@ World::World(int width, int height) {
     setHeight(height);
 }
 
-void World::addOrganism(Organism *organism) {
+void World::addOrganism(Organism* organism) {
+    organism->setBorn(getTurn());
     organisms.push_back(organism);
 }
 
@@ -121,6 +122,8 @@ void World::makeTurn() {
         //Check age
         if (org->getLifetime() - 1 == 0) {
             cout << org->getSpecies() << org->getPosition().toString() << " died" << endl;
+            int born = org->getBorn();
+            org->addAncestors(born, getTurn());
             it = organisms.erase(it);
         } else {
             org->setLifetime(org->getLifetime() - 1);
@@ -171,12 +174,27 @@ void World::makeTurn() {
                 else{
                     cout<< orgToFight->getSpecies() << " beat " << org->getSpecies() << endl;
                 }
+                if(orgToFight->isToxic()){
+                    cout<<org->getSpecies() << " will die from poisoning soon" << endl;
+                    org->setLifetime(2);
+                    org->setPower(0);
+                }
+                int born = beatenOrganism->getBorn();
+                beatenOrganism->addAncestors(born, getTurn());
                 organisms.erase(remove(organisms.begin(), organisms.end(), beatenOrganism), organisms.end());
             }
         }
     }
 
+    for (Organism *org: newOrganisms){
+        org->setBorn(getTurn());
+    }
     organisms.insert(organisms.end(), newOrganisms.begin(), newOrganisms.end());
+
+    for(Organism* org: organisms){
+        cout<<org->toString()<<" ";
+        cout<<org->printAncestors()<<endl;
+    }
     turn++;
 }
 

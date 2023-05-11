@@ -11,4 +11,6 @@ public:
 
     virtual Animal* clone(Position position) = 0;
 
+    bool isToxic();
+
 };
