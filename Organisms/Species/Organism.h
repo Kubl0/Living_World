@@ -35,4 +35,5 @@ public:
 
     virtual void move(int dx, int dy) = 0;
     virtual Organism* clone(Position position) = 0;
+    virtual Organism* consequence(Organism* org1, Organism* org2) = 0;
 };

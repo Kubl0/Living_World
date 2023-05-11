@@ -8,3 +8,7 @@ Plant::Plant(Position position) : Organism(position) {
 void Plant::move(int dx, int dy) {
     Organism::move(0, 0);
 }
+
+Organism* Plant::consequence(Organism* org1, Organism* org2) {
+    return nullptr;
+}

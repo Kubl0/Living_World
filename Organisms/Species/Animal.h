@@ -7,5 +7,8 @@ public:
 
     void move(int dx, int dy);
 
+    Organism* consequence(Organism* org1, Organism* org2);
+
     virtual Animal* clone(Position position) = 0;
+
 };

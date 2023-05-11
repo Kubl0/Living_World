@@ -29,10 +29,14 @@ public:
     void addOrganism(Organism* organism);
     vector<Position> getVectorOfFreePositionsAround(Position position);
     vector<Position> filterPositionFromBorn(vector<Position> freePositions, vector<Organism*> newOrganisms);
+    vector<Position> getNeighboringOrganisms(Position position);
+    Organism* getOrgFromPosition(Position position);
+
 
     void makeTurn();
 
     string toString();
 
+    vector<Position> filterSpecies(vector<Position> positions, string species);
 };
 

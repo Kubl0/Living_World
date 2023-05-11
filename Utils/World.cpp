@@ -76,6 +76,21 @@ vector<Position> World::getVectorOfFreePositionsAround(Position position) {
     return result;
 }
 
+vector<Position> World::getNeighboringOrganisms(Position position) {
+    int pos_x = position.getX(), pos_y = position.getY();
+    vector<Position> result;
+    for (int x = -1; x < 2; ++x)
+        for (int y = -1; y < 2; ++y)
+            if ((x != 0 || y != 0) &&
+                isPositionOnWorld(pos_x + x, pos_y + y)) {
+                result.push_back(Position(pos_x + x, pos_y + y));
+            }
+    auto iter = remove_if(result.begin(), result.end(),
+                          [this](Position pos) { return getOrganismFromPosition(pos.getX(), pos.getY()).empty(); });
+    result.erase(iter, result.end());
+    return result;
+}
+
 string World::toString() {
     string result = "\nturn: " + to_string(getTurn()) + "\n";
     string spec;
@@ -140,10 +155,45 @@ void World::makeTurn() {
                 org->setPower(org->getPower() / 2);
             }
         }
+
+        //Fight if possible
+        vector<Position> neighboringOrganisms = getNeighboringOrganisms(org->getPosition());
+        neighboringOrganisms = filterSpecies(neighboringOrganisms, org->getSpecies());
+        int numberOfNeighboringOrganisms = neighboringOrganisms.size();
+
+        if(numberOfNeighboringOrganisms > 0){
+            int random = rand() % numberOfNeighboringOrganisms;
+            Organism* orgToFight = getOrgFromPosition(neighboringOrganisms[random]);
+            Organism* beatenOrganism = org->consequence(org, orgToFight);
+            if(beatenOrganism != nullptr){
+                if(org != beatenOrganism){
+                    cout << org->getSpecies() << " beat " << beatenOrganism->getSpecies() << endl;}
+                else{
+                    cout<< orgToFight->getSpecies() << " beat " << org->getSpecies() << endl;
+                }
+                organisms.erase(remove(organisms.begin(), organisms.end(), beatenOrganism), organisms.end());
+            }
+        }
     }
 
     organisms.insert(organisms.end(), newOrganisms.begin(), newOrganisms.end());
     turn++;
+}
+
+Organism* World::getOrgFromPosition(Position position){
+    for (Organism *org: organisms)
+        if (org->getPosition().getX() == position.getX() && org->getPosition().getY() == position.getY())
+            return org;
+    return nullptr;
+}
+
+vector<Position> World::filterSpecies(vector<Position> positions, string species){
+    auto iter = remove_if(positions.begin(), positions.end(),
+                          [this, species](Position pos) {
+                              return getOrgFromPosition(pos)->getSpecies() == species;
+                          });
+    positions.erase(iter, positions.end());
+    return positions;
 }
 
 
