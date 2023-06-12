@@ -36,9 +36,9 @@ string Organism::toString() {
            ", position: " + getPosition().toString() +
            ", powerToReproduce: " + to_string(getPowerToReproduce()) +
            ", lifeTime: " + to_string(getLifetime()) +
-              ", born: " + to_string(getBorn()) +
-              " ancestors: " + printAncestors() +
-              " }";
+           ", born: " + to_string(getBorn()) +
+           " ancestors: " + printAncestors() +
+           " }";
 }
 
 string Organism::printAncestors() {

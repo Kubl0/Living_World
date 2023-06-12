@@ -11,6 +11,7 @@ Toadstool::Toadstool(Position position) : Plant(position)
 Toadstool* Toadstool::clone(Position position)
 {
     Toadstool* toadstool = new Toadstool(position);
+    toadstool->setAncestors(getAncestors());
     return toadstool;
 }
 

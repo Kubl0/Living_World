@@ -16,6 +16,7 @@ private:
     int born = 0;
     array<array<int, 2>, 1000> ancestors = {};
 
+
 public:
     Organism(Position position);
 

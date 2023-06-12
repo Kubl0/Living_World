@@ -11,5 +11,6 @@ Dandelion::Dandelion(Position position) : Plant(position)
 Dandelion* Dandelion::clone(Position position)
 {
     Dandelion* dandelion = new Dandelion(position);
+    dandelion->setAncestors(getAncestors());
     return dandelion;
 }
