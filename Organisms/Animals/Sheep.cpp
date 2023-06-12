@@ -11,6 +11,5 @@ Sheep::Sheep(Position position) : Animal(position)
 Sheep* Sheep::clone(Position position)
 {
     Sheep* sheep = new Sheep(position);
-    sheep->setAncestors(cloneAncestors());
     return sheep;
 }

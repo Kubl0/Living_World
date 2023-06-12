@@ -119,11 +119,15 @@ void World::makeTurn() {
     for (auto it = organisms.begin(); it != organisms.end();) {
         auto &org = *it;
 
+
         //Check age
         if (org->getLifetime() - 1 == 0) {
             cout << org->getSpecies() << org->getPosition().toString() << " died" << endl;
-            int born = org->getBorn();
-            org->addAncestors(born, getTurn());
+            for(Organism *organism : organisms){
+                if(organism->getSpecies() == org->getSpecies()){
+                    organism->addAncestor(org->getBorn(), turn);
+                }
+            }
             it = organisms.erase(it);
         } else {
             org->setLifetime(org->getLifetime() - 1);
@@ -179,8 +183,11 @@ void World::makeTurn() {
                     org->setLifetime(2);
                     org->setPower(0);
                 }
-                int born = beatenOrganism->getBorn();
-                beatenOrganism->addAncestors(born, getTurn());
+                for(Organism *org : organisms){
+                    if(org->getSpecies() == beatenOrganism->getSpecies()){
+                        org->addAncestor(beatenOrganism->getBorn(), turn);
+                    }
+                }
                 organisms.erase(remove(organisms.begin(), organisms.end(), beatenOrganism), organisms.end());
             }
         }
@@ -189,12 +196,11 @@ void World::makeTurn() {
     for (Organism *org: newOrganisms){
         org->setBorn(getTurn());
     }
-    organisms.insert(organisms.end(), newOrganisms.begin(), newOrganisms.end());
 
-    for(Organism* org: organisms){
-        cout<<org->toString()<<" ";
-        cout<<org->printAncestors()<<endl;
+    for (Organism *org: organisms){
+       cout<<org->toString()<<endl;
     }
+    organisms.insert(organisms.end(), newOrganisms.begin(), newOrganisms.end());
     turn++;
 }
 

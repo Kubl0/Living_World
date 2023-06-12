@@ -14,7 +14,7 @@ private:
     int powerToReproduce;
     int lifeTime;
     int born = 0;
-    array<array<int, 2>, 1000> ancestors;
+    array<array<int, 2>, 1000> ancestors = {};
 
 public:
     Organism(Position position);
@@ -45,10 +45,8 @@ public:
     virtual Organism* consequence(Organism* org1, Organism* org2) = 0;
     virtual bool isToxic() = 0;
 
-
+    array<array<int, 2>, 1000> getAncestors();
+    void setAncestors(array<array<int, 2>, 1000> ancestors);
     string printAncestors();
-    void addAncestors(int born, int died);
-
-    array<array<int, 2>, 1000> cloneAncestors();
-    void setAncestors(array<array<int, 2>, 1000>);
+    void addAncestor(int born, int died);
 };

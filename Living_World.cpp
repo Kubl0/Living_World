@@ -1,6 +1,4 @@
 #include <iostream>
-#include "Organisms/Species/Organism.h"
-#include "Organisms/Species/Plant.h"
 #include "Utils/World.h"
 #include "Organisms/Plants/Grass.h"
 #include "Organisms/Plants/Dandelion.h"

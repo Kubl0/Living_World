@@ -36,7 +36,37 @@ string Organism::toString() {
            ", position: " + getPosition().toString() +
            ", powerToReproduce: " + to_string(getPowerToReproduce()) +
            ", lifeTime: " + to_string(getLifetime()) +
-           "}";
+              ", born: " + to_string(getBorn()) +
+              " ancestors: " + printAncestors() +
+              " }";
+}
+
+string Organism::printAncestors() {
+    string result = "";
+    for (int i = 0; i < 1000; ++i) {
+        if (ancestors[i][0] != 0) {
+            result += to_string(ancestors[i][0]) + " " + to_string(ancestors[i][1]) + ", ";
+        }
+    }
+    return result;
+}
+
+array<array<int, 2>, 1000> Organism::getAncestors() {
+    return ancestors;
+}
+
+void Organism::setAncestors(array<array<int, 2>, 1000> ancestors) {
+    this->ancestors = ancestors;
+}
+
+void Organism::addAncestor(int born, int died) {
+    for (int i = 0; i < 1000; ++i) {
+        if (ancestors[i][0] == 0) {
+            ancestors[i][0] = born;
+            ancestors[i][1] = died;
+            break;
+        }
+    }
 }
 
 int Organism::getPowerToReproduce() {
@@ -69,33 +99,5 @@ void Organism::setBorn(int born) {
 }
 
 
-string Organism::printAncestors() {
-    string result = "";
-    for (auto & ancestor : ancestors) {
-        if (ancestor[1] == 0) {
-            break;
-        }
-        result += "Born: " + to_string(ancestor[0]) + " Died: " + to_string(ancestor[1]) + "\n";
-    }
-    return result;
-}
-
-void Organism::addAncestors(int born, int died) {
-    for (auto & ancestor : ancestors) {
-        if (ancestor[0] == 0) {
-            ancestor[0] = born;
-            ancestor[1] = died;
-            break;
-        }
-    }
-}
-
-array<array<int, 2>, 1000> Organism::cloneAncestors() {
-    return ancestors;
-}
-
-void Organism::setAncestors(array<array<int, 2>, 1000> ancestors) {
-    this->ancestors = ancestors;
-}
 
 
