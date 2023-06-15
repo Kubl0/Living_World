@@ -1,4 +1,5 @@
 #include "Sheep.h"
+#include <iostream>
 
 Sheep::Sheep(Position position) : Animal(position)
 {
@@ -6,6 +7,10 @@ Sheep::Sheep(Position position) : Animal(position)
     setPower(5);
     setLifetime(15);
     setPowerToReproduce(9);
+}
+
+Sheep::~Sheep(){
+    cout<<this->getPosition().toString()<<"Sheep destroyed. Adress: "<<this<<endl;
 }
 
 Sheep* Sheep::clone(Position position)

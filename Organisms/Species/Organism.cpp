@@ -8,7 +8,6 @@ Organism::Organism(Position position) {
 }
 
 Organism::~Organism() {
-    cout<<position.toString()<<"Organism destroyed. Adress: "<<this<<endl;
 }
 
 int Organism::getPower() {

@@ -4,6 +4,7 @@
 class Sheep : public Animal{
 public:
     Sheep(Position position);
+    ~Sheep();
 
     Sheep* clone(Position position);
 };
