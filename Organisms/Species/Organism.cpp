@@ -2,8 +2,13 @@
 #include "Organism.h"
 
 Organism::Organism(Position position) {
+    cout<<position.toString()<<"Organism created. Adress: "<<this<<endl;
     this->position = position;
     setSpecies("O");
+}
+
+Organism::~Organism() {
+    cout<<position.toString()<<"Organism destroyed. Adress: "<<this<<endl;
 }
 
 int Organism::getPower() {

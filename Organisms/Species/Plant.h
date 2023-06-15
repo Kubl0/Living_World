@@ -8,7 +8,7 @@ public:
 
     void move(int dx, int dy);
 
-    Organism* consequence(Organism* org1, Organism* org2);
+    shared_ptr<Organism> consequence(shared_ptr<Organism> org1, shared_ptr<Organism> org2);
 
     bool isToxic();
 

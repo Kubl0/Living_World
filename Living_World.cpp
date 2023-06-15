@@ -8,17 +8,17 @@
 
 int main() {
     World world(5,5);
-    Grass grass(Position(0,0));
-    Dandelion dandelion(Position(1,1));
-    Toadstool toadstool(Position(2,2));
-    world.addOrganism(&grass);
-    world.addOrganism(&dandelion);
-    world.addOrganism(&toadstool);
+    shared_ptr<Organism> grass = make_shared<Grass>(Position(0,0));
+    shared_ptr<Organism> dandelion = make_shared<Dandelion>(Position(1,1));
+    shared_ptr<Organism> toadstool = make_shared<Toadstool>(Position(2,2));
+    world.addOrganism(grass);
+    world.addOrganism(dandelion);
+    world.addOrganism(toadstool);
 
-    Sheep sheep(Position(3,3));
-    Wolf wolf(Position(4,4));
-    world.addOrganism(&sheep);
-    world.addOrganism(&wolf);
+    shared_ptr<Organism> sheep = make_shared<Sheep>(Position(3,3));
+    shared_ptr<Organism> wolf = make_shared<Wolf>(Position(4,4));
+    world.addOrganism(sheep);
+    world.addOrganism(wolf);
 
     cout << world.toString();
 
@@ -28,4 +28,18 @@ int main() {
         world.makeTurn();
         cout << world.toString();
     }
+
+//    world.makeTurn();
+//    cout << world.toString() << endl;
+//
+//    world.writeWorld("world.bin");
+//
+//    // Tura 3
+//    world.makeTurn();
+//    cout << world.toString() << endl;
+//
+//    // powrot do Tury 2
+//    world.readWorld("world.bin");
+//    cout << world.toString() << endl;
+
 }

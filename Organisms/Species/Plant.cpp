@@ -9,7 +9,7 @@ void Plant::move(int dx, int dy) {
     Organism::move(0, 0);
 }
 
-Organism* Plant::consequence(Organism* org1, Organism* org2) {
+shared_ptr<Organism> Plant::consequence(shared_ptr<Organism> org1, shared_ptr<Organism> org2) {
     return nullptr;
 }
 
